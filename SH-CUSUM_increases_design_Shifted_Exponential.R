@@ -1,17 +1,18 @@
-alpha1<-0.0015 # lower than 0.002
+alpha1<-0.0015 # alpha1, for determining Shewhart limit
 theta0<-10 # IC theta
 lambda0<-100 # IC lambda
-UCLsh<-theta0-lambda0*log(alpha1)
+UCLsh<-theta0-lambda0*log(alpha1) # the Shewhart limit
+# manual numerical search for finding the decision interval, below is the last stage of the search
 for(h1 in seq(5.35,5.35,by=0.01)){
   #h<-4.5
   sims<-25000 # simulation runs
   k<-1.0 # reference value
-  mu0X<-theta0+lambda0
-  sigma0X<-lambda0
+  mu0X<-theta0+lambda0 # IC process mean
+  sigma0X<-lambda0 # IC process standard deviation
   listrl1<-c() # empty vector to store the RLs
   # CUSUM
   for(j0 in 1:sims){
-    c0<-0# starting value
+    c0<-0 # starting value
     j<-1 # counter
     z<-rexp(1,rate=(1/lambda0))+theta0 # an obs from SE -- IC
     x<-(z-theta0)/lambda0

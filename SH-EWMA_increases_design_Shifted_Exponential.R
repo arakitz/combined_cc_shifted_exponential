@@ -1,17 +1,19 @@
-# EWMA increases with SH limit
+# EWMA increases with SH limit, determine the values of the design parameters
 theta0<-10 # IC theta
 lambda0<-100 # IC lambda
-a1<-0.0005
-UCLsh<-theta0-lambda0*log(a1)
+a1<-0.0005 # alpha1, for determing Shewhart limit
+UCLsh<-theta0-lambda0*log(a1) # Shewhart limit
 lam<-0.30 # reference value
-mu0X<-theta0+lambda0
-sigma0X<-lambda0
+mu0X<-theta0+lambda0 # IC process mean
+sigma0X<-lambda0 # IC process standard deviation
+# manual search for the UCLe
+# below is the final stage of searching
 for(h2 in seq(282.95,283.05,by=0.01)){
   sims<-25000 # simulation runs
   listrl<-c() # empty vector to store the RLs
   # EWMA
   for(j0 in 1:sims){
-    c0<-mu0X# starting value
+    c0<-mu0X # starting value
     j<-1 # counter
     x<-rexp(1,rate=(1/lambda0))+theta0 # an obs from SE -- IC
     # z<-(x-theta0)/lambda0

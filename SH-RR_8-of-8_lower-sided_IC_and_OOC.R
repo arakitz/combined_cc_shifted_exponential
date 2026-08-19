@@ -42,9 +42,3 @@ for(theta1 in c(10,7,5)){
   }
 }
 ################# END #####################################
-QVALUE <- hcubature(QARLearl,lowerLimit=c(thetamin,lambdamin),
-                    upperLimit=c(thetamax,lambdamax))$integral   
-EQARL1 <- QVALUE/((thetamax-thetamin)*(lambdamax-lambdamin))
-EQARL1 
-##########################################
-c(EARL1,EQARL1) 
